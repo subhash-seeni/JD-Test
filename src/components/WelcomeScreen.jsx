@@ -151,7 +151,7 @@ export default function WelcomeScreen({ onStart, totalQuestions }) {
             <div className="ready-note">
               {isFormValid ? (
                 <span style={{ color: 'var(--success)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                  <CheckCircle2 size={16} /> All fields complete — ready to begin.
+                  <CheckCircle2 size={16} /> All fields complete - ready to begin.
                 </span>
               ) : (
                 <span>* Enter your name and valid email to enable the start button.</span>

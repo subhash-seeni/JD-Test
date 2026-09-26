@@ -1,28 +1,28 @@
 # Prompt for Antigravity: Junior Developer Assessment Test App
 
-Build a single-page React web application for a developer skills assessment test. Use React (functional components + hooks), plain CSS or Tailwind, and no backend — store everything in local state (with results computed client-side at the end).
+Build a single-page React web application for a developer skills assessment test. Use React (functional components + hooks), plain CSS or Tailwind, and no backend - store everything in local state (with results computed client-side at the end).
 
 ## Test content & structure
 - Candidate: a junior developer with knowledge of HTML, CSS, JavaScript, and PHP (learning React).
 - Use the question bank provided at the end of this prompt (22 questions covering HTML, CSS, JavaScript, PHP, and basic React), mixed across topics (don't group by topic).
 - Two question types:
   1. Multiple choice (4 options, single correct answer)
-  2. Code snippet write (a textarea where the candidate types code; auto-graded — see "Auto-grading code questions" below)
-- Difficulty curve: start with easy questions, place the hardest questions around the middle of the test, and end on medium difficulty. The question bank below is already ordered this way — preserve that order, don't shuffle difficulty, but you may shuffle the 4 MCQ options per question.
-- One question per page/screen — no scrolling through a full list.
+  2. Code snippet write (a textarea where the candidate types code; auto-graded - see "Auto-grading code questions" below)
+- Difficulty curve: start with easy questions, place the hardest questions around the middle of the test, and end on medium difficulty. The question bank below is already ordered this way - preserve that order, don't shuffle difficulty, but you may shuffle the 4 MCQ options per question.
+- One question per page/screen - no scrolling through a full list.
 
 ## Navigation & flow
-- "Next" button to advance (disabled until an answer/code is entered, or allow skip with a confirmation — default to allowing skip).
-- No going back to previous questions — but make this a configurable constant (`ALLOW_BACK = false`) so it's easy to change later.
+- "Next" button to advance (disabled until an answer/code is entered, or allow skip with a confirmation - default to allowing skip).
+- No going back to previous questions - but make this a configurable constant (`ALLOW_BACK = false`) so it's easy to change later.
 - A visible progress bar at the top showing "Question X of Y" and percentage complete.
 - A countdown timer for the whole test, total duration 50 minutes (configurable constant between 45–60), visible at all times. Auto-submit when time runs out.
 
 ## Auto-grading code questions
-Grade code answers automatically, but treat this as best-effort — it will not be 100% accurate, especially for PHP, so store the raw submitted code alongside the auto-score and surface both on the results page for a human to spot-check.
+Grade code answers automatically, but treat this as best-effort - it will not be 100% accurate, especially for PHP, so store the raw submitted code alongside the auto-score and surface both on the results page for a human to spot-check.
 
 **JavaScript code questions (function-based):**
 - Each JS code question in the bank below includes a `testCases` array (input(s) + expected output).
-- On submit, take the candidate's code as a string, load it into an isolated execution context — an `iframe` with `sandbox="allow-scripts"` and no `allow-same-origin` (so it can't touch the parent page), or a `Web Worker` — and run each test case against it with a short timeout (e.g. 1–2 seconds) to guard against infinite loops.
+- On submit, take the candidate's code as a string, load it into an isolated execution context - an `iframe` with `sandbox="allow-scripts"` and no `allow-same-origin` (so it can't touch the parent page), or a `Web Worker` - and run each test case against it with a short timeout (e.g. 1–2 seconds) to guard against infinite loops.
 - Use `postMessage` to get results back from the sandbox instead of `eval`-ing directly in the main app.
 - Score = (test cases passed / total test cases) for that question. Catch and gracefully handle syntax errors or exceptions (0 score for that question, but don't crash the app).
 - Do fuzzy comparison on outputs where sensible (e.g., trim whitespace, compare arrays by value not reference).
@@ -33,7 +33,7 @@ Grade code answers automatically, but treat this as best-effort — it will not 
 
 **PHP code questions:**
 - True execution requires a PHP runtime, which a no-backend app doesn't have. Use one of these two approaches (pick the simpler one to implement first, note the other as a future improvement in code comments):
-  1. **Best-effort static grading (default, simpler):** Regex/keyword-based checks against the candidate's code — e.g. for `sumArray`, check for a loop or `array_sum`, a `return` statement, and the correct function name/signature. Assign partial credit per matched pattern. Clearly flag this question type as "auto-graded (approximate) — recommend manual review" on the results page.
+  1. **Best-effort static grading (default, simpler):** Regex/keyword-based checks against the candidate's code - e.g. for `sumArray`, check for a loop or `array_sum`, a `return` statement, and the correct function name/signature. Assign partial credit per matched pattern. Clearly flag this question type as "auto-graded (approximate) - recommend manual review" on the results page.
   2. **In-browser PHP execution (optional, more accurate):** Use the `php-wasm` package (a WebAssembly PHP interpreter that runs client-side, no backend needed) to actually execute the candidate's PHP function against test cases, same pass/fail scoring as the JS questions. Note the extra bundle size and load time as a tradeoff.
 - Implementation should default to option 1 and leave a clearly commented spot to swap in option 2 later.
 
@@ -44,7 +44,7 @@ Grade code answers automatically, but treat this as best-effort — it will not 
 ## Results
 - On the last question, show a "Submit Test" button.
 - Results page shows: total score (MCQs + auto-graded code combined), number correct/incorrect for MCQs, per-question breakdown for code questions (see above), time taken, and a breakdown by topic (HTML/CSS/JS/PHP/React).
-- Add a small disclaimer near the total score: "Code question scores are auto-graded and approximate — please spot-check before final evaluation."
+- Add a small disclaimer near the total score: "Code question scores are auto-graded and approximate - please spot-check before final evaluation."
 
 ## Anti-copy protection
 - Disable text selection across the site using CSS (`user-select: none`).
@@ -54,7 +54,7 @@ Grade code answers automatically, but treat this as best-effort — it will not 
 
 ## Visual design
 - Clean, minimal, professional UI.
-- Border-radius should be small/subtle only (e.g., 4–6px) — avoid pill-shaped buttons or heavily rounded cards.
+- Border-radius should be small/subtle only (e.g., 4–6px) - avoid pill-shaped buttons or heavily rounded cards.
 - Clear typography hierarchy, generous spacing, a neutral color palette (e.g., dark text on white/light gray background, one accent color for buttons/progress bar).
 - Responsive layout that works on a laptop screen at minimum.
 

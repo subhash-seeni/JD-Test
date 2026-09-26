@@ -68,7 +68,7 @@ function doPost(e) {
       '<pre style="background: #f1f5f9; padding: 12px; border-radius: 4px; font-size: 13px; font-family: monospace; white-space: pre-wrap;">' + topicBreakdown + '</pre>' +
       '<h3 style="font-size: 15px; margin: 24px 0 8px; color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">Code Questions & Submitted Solutions</h3>' +
       '<pre style="background: #0f172a; color: #f8fafc; padding: 14px; border-radius: 4px; font-size: 12.5px; font-family: monospace; white-space: pre-wrap; overflow-x: auto;">' + codeBreakdown + '</pre>' +
-      '<p style="font-size: 11.5px; color: #94a3b8; margin-top: 24px;">Note: Code question scores are auto-graded and approximate — please spot-check before final evaluation.</p>' +
+      '<p style="font-size: 11.5px; color: #94a3b8; margin-top: 24px;">Note: Code question scores are auto-graded and approximate - please spot-check before final evaluation.</p>' +
       '</div>' +
       '</div>';
 

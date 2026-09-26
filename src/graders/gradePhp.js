@@ -1,7 +1,7 @@
 /**
  * PHP Code Grader
  * Defaults to Option 1: Best-effort static regex & structural parsing with partial credit.
- * Clearly flagged as "auto-graded (approximate) — recommend manual review".
+ * Clearly flagged as "auto-graded (approximate) - recommend manual review".
  * 
  * ============================================================================
  * FUTURE EXTENSION: Option 2 (In-Browser WebAssembly PHP Execution)

@@ -17,7 +17,6 @@ import {
   Send,
   FileCheck
 } from 'lucide-react';
-import { RECIPIENT_EMAIL } from '../emailConfig';
 
 export default function ResultsPage({
   candidate,
@@ -97,9 +96,9 @@ export default function ResultsPage({
           <CheckCircle2 size={24} />
         </div>
         <div>
-          <h2 className="confirm-heading">Test submitted — thank you!</h2>
+          <h2 className="confirm-heading">Submitted</h2>
           <p className="confirm-subtext">
-            Your assessment has been successfully recorded. Results have been automatically dispatched to <strong>{RECIPIENT_EMAIL}</strong>.
+            Your assessment has been successfully submitted.
           </p>
         </div>
       </div>
@@ -140,7 +139,7 @@ export default function ResultsPage({
         {/* Disclaimer as specified in prompt */}
         <div className="results-disclaimer">
           <AlertTriangle size={16} />
-          <span>Code question scores are auto-graded and approximate — please spot-check before final evaluation.</span>
+          <span>Code question scores are auto-graded and approximate - please spot-check before final evaluation.</span>
         </div>
 
         {/* Summary Stats */}
@@ -247,7 +246,7 @@ export default function ResultsPage({
                     {q.topic === 'PHP' && (
                       <div className="manual-review-note">
                         <AlertTriangle size={13} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'text-bottom' }} />
-                        Auto-graded (approximate static evaluation) — recommend manual code review.
+                        Auto-graded (approximate static evaluation) - recommend manual code review.
                       </div>
                     )}
 
