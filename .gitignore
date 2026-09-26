@@ -20,9 +20,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Netlify local files
-.netlify/
-
 # Editor & OS files
 .DS_Store
 *.suo
