@@ -1,6 +1,6 @@
-import { gradeJsCode } from './gradeJs';
-import { gradeCssCode } from './gradeCss';
-import { gradePhpCode } from './gradePhp';
+import { gradeJsCode } from './gradeJs.js';
+import { gradeCssCode } from './gradeCss.js';
+import { gradePhpCode } from './gradePhp.js';
 
 /**
  * Unified Grading Dispatcher

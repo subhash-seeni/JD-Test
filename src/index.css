@@ -1329,5 +1329,372 @@ button {
     height: 30px;
     font-size: 11.5px;
   }
+  .audience-tabs-bar {
+    flex-direction: column;
+  }
 }
+
+/* ==========================================================================
+   Enhanced Executive & Technical Results Styling
+   ========================================================================== */
+.report-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.verdict-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--radius-xs);
+  margin-top: 8px;
+}
+
+.verdict-green {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.verdict-blue {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.verdict-yellow {
+  background: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.verdict-red {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+/* Audience Tabs Bar */
+.audience-tabs-bar {
+  display: flex;
+  gap: 8px;
+  background: var(--bg-card-subtle);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 24px;
+}
+
+.audience-tab-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.audience-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--text-primary);
+}
+
+.audience-tab-btn.active {
+  background: #ffffff;
+  color: var(--accent-blue);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Executive Verdict Card */
+.verdict-card {
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.verdict-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.verdict-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.8);
+  flex-shrink: 0;
+}
+
+.verdict-subtext {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.verdict-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.verdict-recommendation-text {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.95;
+}
+
+/* Performance Narrative Card */
+.narrative-card {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.narrative-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.narrative-icon {
+  color: var(--accent-blue);
+}
+
+.narrative-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.narrative-item {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+
+.narrative-item-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.narrative-item-text {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Strengths and Growth Areas */
+.strengths-growth-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.sg-box {
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  border: 1px solid var(--border-subtle);
+}
+
+.sg-strengths {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.sg-growth {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.sg-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.sg-strengths .sg-header {
+  color: #15803d;
+}
+
+.sg-growth .sg-header {
+  color: #b45309;
+}
+
+.sg-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sg-list li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  position: relative;
+  padding-left: 14px;
+}
+
+.sg-strengths .sg-list li::before {
+  content: '•';
+  color: #16a34a;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.sg-growth .sg-list li::before {
+  content: '•';
+  color: #d97706;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.sg-empty {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Interview Prompts Box */
+.interview-prompts-box {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+
+.interview-prompts-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e40af;
+  margin-bottom: 8px;
+}
+
+.interview-prompts-list {
+  margin: 0;
+  padding-left: 20px;
+  color: #1e3a8a;
+  font-size: 13px;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Competency Tags in Technical Matrix */
+.competency-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.comp-high {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.comp-mid {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.comp-low {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.btn-xs {
+  padding: 4px 8px;
+  font-size: 11.5px;
+}
+
+/* Print Optimization */
+@media print {
+  .site-header,
+  .print-hide,
+  .audience-tabs-bar,
+  .action-controls,
+  .results-banner-header button {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .results-page {
+    padding: 0 !important;
+  }
+
+  .results-banner,
+  .narrative-card,
+  .results-section,
+  .verdict-card {
+    box-shadow: none !important;
+    border: 1px solid #cccccc !important;
+    page-break-inside: avoid;
+  }
+
+  .executive-summary-section,
+  .technical-deepdive-section {
+    display: block !important;
+  }
+}
+
 

@@ -3,8 +3,8 @@
  * Change constants here to tune assessment behavior
  */
 
-// Total duration of the test in minutes (30 mins)
-export const TEST_DURATION_MINUTES = 30;
+// Total duration of the test in minutes (35 mins for 30 questions)
+export const TEST_DURATION_MINUTES = 35;
 
 // Whether the candidate is allowed to navigate back to previous questions
 // Set to true as requested

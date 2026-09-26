@@ -5,7 +5,7 @@
  * Returns { score, passedCount, totalCount, details, error }
  */
 
-import { JS_TIMEOUT_MS } from '../config';
+import { JS_TIMEOUT_MS } from '../config.js';
 
 /**
  * Fuzzy comparison function for test results

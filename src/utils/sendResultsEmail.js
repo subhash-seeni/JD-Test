@@ -5,10 +5,11 @@ import {
   EMAILJS_TEMPLATE_ID,
   EMAILJS_PUBLIC_KEY,
   RECIPIENT_EMAIL
-} from '../emailConfig';
+} from '../emailConfig.js';
 
 /**
  * Format and send the candidate's assessment results
+ * Structured for both Non-Technical HR/Recruiters and Technical Engineering Leads
  * Primary: Google Apps Script Webhook (Google Workspace native, free)
  * Secondary: EmailJS (if configured)
  */
@@ -28,6 +29,65 @@ export async function sendAssessmentResultsEmail({
   const seconds = timeTakenSeconds % 60;
   const timeFormatted = `${minutes}m ${seconds}s`;
 
+  const percentage = Math.round((totalScore / totalQuestions) * 100);
+  const codeQuestions = questions.filter((q) => q.type === 'code');
+  let codeEarned = 0;
+  codeQuestions.forEach((q) => {
+    codeEarned += gradedResults[q.id]?.score || 0;
+  });
+  const codePercentage = codeQuestions.length > 0 ? Math.round((codeEarned / codeQuestions.length) * 100) : 0;
+  const mcqPercentage = mcqStats.total > 0 ? Math.round((mcqStats.correct / mcqStats.total) * 100) : 0;
+
+  // Executive Hiring Insights
+  let verdictTitle = '';
+  let verdictBadge = '';
+  let readiness = '';
+  let executiveSummary = '';
+
+  if (percentage >= 85) {
+    verdictTitle = 'STRONG HIRE RECOMMENDATION';
+    verdictBadge = 'Exceptional Performance (Top Tier)';
+    readiness = 'Immediate readiness for Junior Developer role';
+    executiveSummary = `Candidate ${candidate.name} demonstrated high mastery across both front-end (HTML/CSS) and back-end (JavaScript/PHP). Code challenges were completed cleanly with strong pattern adherence. Recommended for fast-tracking to final round or offer.`;
+  } else if (percentage >= 70) {
+    verdictTitle = 'RECOMMENDED FOR NEXT ROUND';
+    verdictBadge = 'Solid Foundation (Competent)';
+    readiness = 'Ready for Junior Developer position with standard onboarding';
+    executiveSummary = `Candidate ${candidate.name} demonstrated a solid grasp of core web development, responsive CSS, JavaScript logic, and PHP backend scripting. Ready for standard engineering tickets with light mentorship.`;
+  } else if (percentage >= 50) {
+    verdictTitle = 'BORDERLINE - TARGETED TECHNICAL REVIEW REQUIRED';
+    verdictBadge = 'Needs Mentoring';
+    readiness = 'Requires structured pairing and mentorship on weaker topics';
+    executiveSummary = `Candidate ${candidate.name} shows foundational promise but exhibited gaps in specific code implementations and logic. Recommend a targeted technical conversation to probe debugging skills.`;
+  } else {
+    verdictTitle = 'BELOW BENCHMARK - NOT RECOMMENDED';
+    verdictBadge = 'Significant Skill Gaps';
+    readiness = 'Not currently ready for independent junior engineering tasks';
+    executiveSummary = `Candidate ${candidate.name} struggled across multiple topics, scoring below passing thresholds on both theory and code implementation.`;
+  }
+
+  // Strengths & Growth Areas
+  const strengths = [];
+  const growthAreas = [];
+  const interviewQuestions = [];
+
+  Object.entries(topicStats).forEach(([topic, stats]) => {
+    const topicPct = stats.total > 0 ? Math.round((stats.earned / stats.total) * 100) : 0;
+    const label = topic === 'JS' ? 'JavaScript' : topic;
+    if (topicPct >= 75) {
+      strengths.push(`${label} (${topicPct}%)`);
+    } else if (topicPct < 65) {
+      growthAreas.push(`${label} (${topicPct}%)`);
+      if (topic === 'PHP') {
+        interviewQuestions.push('Ask candidate to explain PHP foreach loop syntax and array_filter() vs standard iteration.');
+      } else if (topic === 'JS') {
+        interviewQuestions.push('Ask candidate about handling edge cases in JavaScript functions and array methods.');
+      } else if (topic === 'CSS') {
+        interviewQuestions.push('Ask candidate to explain CSS Flexbox space-between vs space-around.');
+      }
+    }
+  });
+
   // Format topic breakdown string
   const topicLines = Object.entries(topicStats).map(([topic, stats]) => {
     const pct = stats.total > 0 ? Math.round((stats.earned / stats.total) * 100) : 0;
@@ -35,8 +95,7 @@ export async function sendAssessmentResultsEmail({
   }).join('\n');
 
   // Format code questions breakdown string
-  const codeQuestions = questions.filter(q => q.type === 'code');
-  const codeDetails = codeQuestions.map(q => {
+  const codeDetails = codeQuestions.map((q) => {
     const res = gradedResults[q.id] || {};
     const scorePct = Math.round((res.score || 0) * 100);
     const submitted = res.submittedCode || userAnswers[q.id] || '// None provided';
@@ -50,23 +109,31 @@ export async function sendAssessmentResultsEmail({
       }).join('\n');
     }
 
-    return `--------------------------------------------------
+    return `==================================================
 [Q${q.id} - ${q.topic}] ${q.question}
 Score: ${scorePct}% (${res.passedCount || 0}/${res.totalCount || 0} criteria)
-Criteria Details:
-${criteriaSummary}
+Criteria Breakdown:
+${criteriaSummary || '   - Automated checks completed'}
 
 Submitted Code:
 ${submitted}
---------------------------------------------------`;
+==================================================`;
   }).join('\n\n');
 
   const payload = {
     to_email: RECIPIENT_EMAIL,
     candidate_name: candidate.name || 'Anonymous Candidate',
     candidate_email: candidate.email || 'Not provided',
-    total_score: `${Math.round(totalScore * 10) / 10} / ${totalQuestions} (${Math.round((totalScore / totalQuestions) * 100)}%)`,
-    mcq_breakdown: `${mcqStats.correct} / ${mcqStats.total} correct (${mcqStats.incorrect} incorrect/skipped)`,
+    total_score: `${Math.round(totalScore * 10) / 10} / ${totalQuestions} (${percentage}%)`,
+    verdict_title: verdictTitle,
+    verdict_badge: verdictBadge,
+    readiness_level: readiness,
+    executive_summary: executiveSummary,
+    strengths_summary: strengths.join(', ') || 'General fundamentals',
+    growth_summary: growthAreas.join(', ') || 'None identified',
+    interview_prompts: interviewQuestions.join('\n- ') || 'Standard round 2 technical review',
+    mcq_breakdown: `${mcqStats.correct} / ${mcqStats.total} correct (${mcqPercentage}%)`,
+    code_score_breakdown: `${Math.round(codeEarned * 10) / 10} / ${codeQuestions.length} pts (${codePercentage}%)`,
     topic_breakdown: topicLines,
     code_breakdown: codeDetails,
     time_taken: timeFormatted,
@@ -79,7 +146,7 @@ ${submitted}
       console.log('Sending assessment results via Google Apps Script Webhook...');
       await fetch(GOOGLE_APPS_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors', // Standard for Google Apps Script Web App endpoints
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'text/plain;charset=utf-8'
         },
@@ -112,10 +179,45 @@ ${submitted}
     }
   }
 
-  // If neither is configured yet, log detailed report to console
   console.info(
     'Assessment results generated. Set GOOGLE_APPS_SCRIPT_URL in src/emailConfig.js to receive live emails in subhash@geotrixteam.com.'
   );
   console.log('Assessment Results Payload:', payload);
+  return { success: true, simulated: true };
+}
+
+/**
+ * Dispatch an instant notification when a candidate starts the assessment
+ */
+export async function sendTestStartedEmail({ candidate, totalQuestions, durationMinutes }) {
+  const payload = {
+    event_type: 'test_started',
+    to_email: RECIPIENT_EMAIL,
+    candidate_name: candidate?.name || 'Anonymous Candidate',
+    candidate_email: candidate?.email || 'Not provided',
+    total_questions: totalQuestions,
+    duration_minutes: durationMinutes,
+    started_at: new Date().toLocaleString()
+  };
+
+  if (GOOGLE_APPS_SCRIPT_URL && GOOGLE_APPS_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL') {
+    try {
+      console.log('Sending test start notification via Google Apps Script Webhook...');
+      await fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(payload)
+      });
+      console.log('Test start notification dispatched successfully.');
+      return { success: true };
+    } catch (err) {
+      console.error('Failed to dispatch test start notification:', err);
+    }
+  }
+
+  console.info('Test start notification logged (webhook URL placeholder or simulation mode):', payload);
   return { success: true, simulated: true };
 }

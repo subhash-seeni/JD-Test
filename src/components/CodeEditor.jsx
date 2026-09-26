@@ -69,28 +69,32 @@ export default function CodeEditor({ question, value, onChange, onReset }) {
       <div className="code-hints">
         <div className="code-hints-title">
           <Lightbulb size={15} />
-          <span>Evaluation Criteria & Requirements</span>
+          <span>Evaluation Criteria & Instructions</span>
         </div>
-        {question.topic === 'JS' && question.testCases && (
+        {question.hints && Array.isArray(question.hints) ? (
+          <ul>
+            {question.hints.map((hint, i) => (
+              <li key={i}>{hint}</li>
+            ))}
+          </ul>
+        ) : question.topic === 'JS' && question.testCases ? (
           <ul>
             <li>Your function should handle all standard inputs and edge cases.</li>
             <li>Sample tests: {question.testCases.slice(0, 3).map(tc => tc.label).join(', ')}</li>
             <li>Code is executed in a sandboxed runtime against isolated test suites.</li>
           </ul>
-        )}
-        {question.topic === 'CSS' && (
+        ) : question.topic === 'CSS' ? (
           <ul>
             <li>Target selector: <code>.container</code></li>
             <li>Use Flexbox properties to achieve equal item distribution along a row.</li>
             <li>Computed element layout is evaluated upon submission.</li>
           </ul>
-        )}
-        {question.topic === 'PHP' && (
+        ) : question.topic === 'PHP' ? (
           <ul>
             <li>Define the function with proper arguments and return statement.</li>
             <li>Auto-graded via structural and pattern evaluation.</li>
           </ul>
-        )}
+        ) : null}
       </div>
     </div>
   );

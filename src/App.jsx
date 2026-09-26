@@ -9,7 +9,7 @@ import Toast from './components/Toast';
 import { QUESTIONS } from './data/questions';
 import { TEST_DURATION_MINUTES, ALLOW_BACK } from './config';
 import { gradeAllAnswers } from './graders';
-import { sendAssessmentResultsEmail } from './utils/sendResultsEmail';
+import { sendAssessmentResultsEmail, sendTestStartedEmail } from './utils/sendResultsEmail';
 
 export default function App() {
   // Shuffle MCQ options once per session while keeping the 22 questions in exact order
@@ -102,6 +102,15 @@ export default function App() {
     setIsStarted(true);
     setStartTime(Date.now());
     showToast(`Welcome ${candidateInfo.name}. Assessment timer started.`, 'info');
+
+    // Notify email in background (fire-and-forget, non-blocking)
+    sendTestStartedEmail({
+      candidate: candidateInfo,
+      totalQuestions: questions.length,
+      durationMinutes: TEST_DURATION_MINUTES
+    }).catch((err) => {
+      console.warn('Background test start notification error:', err);
+    });
   };
 
   const handleAnswerChange = (val) => {
