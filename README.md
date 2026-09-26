@@ -69,6 +69,6 @@ npm run preview
 
 ## ⚙️ Configuration
 
-- [src/config.js](src/config.js): Customize test duration (`TEST_DURATION_MINUTES = 50`), navigation permissions (`ALLOW_BACK = true`), and execution timeouts.
+- [src/config.js](src/config.js): Customize test duration (`TEST_DURATION_MINUTES = 30`), navigation permissions (`ALLOW_BACK = true`), and execution timeouts.
 - [src/data/questions.js](src/data/questions.js): Edit, add, or customize questions, test cases, and difficulty order.
 - [src/emailConfig.js](src/emailConfig.js): Contains the Google Apps Script Webhook URL and recipient email address.
