@@ -1,18 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Clock } from 'lucide-react';
 
 export default function Timer({ durationSeconds, onTimeUp, isActive = true }) {
   const [timeLeft, setTimeLeft] = useState(durationSeconds);
+  const hasTriggeredRef = useRef(false);
+  const onTimeUpRef = useRef(onTimeUp);
 
+  // Keep latest onTimeUp callback in ref without restarting the timer
+  useEffect(() => {
+    onTimeUpRef.current = onTimeUp;
+  }, [onTimeUp]);
+
+  // Reset when durationSeconds changes
   useEffect(() => {
     setTimeLeft(durationSeconds);
+    hasTriggeredRef.current = false;
   }, [durationSeconds]);
 
   useEffect(() => {
     if (!isActive) return;
 
+    // Guard if already expired at start
     if (timeLeft <= 0) {
-      if (onTimeUp) onTimeUp();
+      if (!hasTriggeredRef.current) {
+        hasTriggeredRef.current = true;
+        onTimeUpRef.current?.();
+      }
       return;
     }
 
@@ -20,7 +33,13 @@ export default function Timer({ durationSeconds, onTimeUp, isActive = true }) {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(intervalId);
-          if (onTimeUp) onTimeUp();
+          if (!hasTriggeredRef.current) {
+            hasTriggeredRef.current = true;
+            // Defer invocation out of the render loop
+            setTimeout(() => {
+              onTimeUpRef.current?.();
+            }, 0);
+          }
           return 0;
         }
         return prev - 1;
@@ -28,7 +47,7 @@ export default function Timer({ durationSeconds, onTimeUp, isActive = true }) {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [isActive, timeLeft, onTimeUp]);
+  }, [isActive]); // Only react to active state changes, not timeLeft or onTimeUp
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;

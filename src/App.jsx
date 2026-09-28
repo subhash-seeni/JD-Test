@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import Header from './components/Header';
 import WelcomeScreen from './components/WelcomeScreen';
 import QuestionNavigator from './components/QuestionNavigator';
@@ -12,11 +12,10 @@ import { gradeAllAnswers } from './graders';
 import { sendAssessmentResultsEmail, sendTestStartedEmail } from './utils/sendResultsEmail';
 
 export default function App() {
-  // Shuffle MCQ options once per session while keeping the 22 questions in exact order
+  // Shuffled MCQ options once per session
   const initializedQuestions = useMemo(() => {
     return QUESTIONS.map((q) => {
       if (q.type === 'mcq' && Array.isArray(q.options)) {
-        // Deterministic shuffle copy
         const shuffled = [...q.options].sort(() => Math.random() - 0.5);
         return { ...q, options: shuffled };
       }
@@ -36,6 +35,9 @@ export default function App() {
   const [timeTakenSeconds, setTimeTakenSeconds] = useState(0);
   const [showSkipModal, setShowSkipModal] = useState(false);
   const [toasts, setToasts] = useState([]);
+
+  // Strict submission lock to prevent double-dispatch under any circumstances
+  const hasSubmittedRef = useRef(false);
 
   const totalDurationSeconds = TEST_DURATION_MINUTES * 60;
 
@@ -141,11 +143,16 @@ export default function App() {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);
     } else {
-      handleSubmit();
+      handleSubmit(false);
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async (isAutoSubmit = false) => {
+    if (hasSubmittedRef.current) {
+      console.warn('Submission already in progress or completed. Ignoring redundant submit trigger.');
+      return;
+    }
+    hasSubmittedRef.current = true;
     setIsSubmitting(true);
     setShowSkipModal(false);
 
@@ -163,6 +170,7 @@ export default function App() {
       let totalScore = 0;
       let mcqCorrect = 0;
       let mcqIncorrect = 0;
+      let mcqUnanswered = 0;
       let mcqTotal = 0;
       const topicStats = {
         HTML: { earned: 0, total: 0 },
@@ -181,12 +189,19 @@ export default function App() {
         }
         if (q.type === 'mcq') {
           mcqTotal += 1;
-          if (res && res.isCorrect) mcqCorrect += 1;
-          else mcqIncorrect += 1;
+          const userAns = userAnswers[q.id];
+          const hasAnswer = userAns !== undefined && userAns !== null && String(userAns).trim() !== '';
+          if (!hasAnswer) {
+            mcqUnanswered += 1;
+          } else if (res && res.isCorrect) {
+            mcqCorrect += 1;
+          } else {
+            mcqIncorrect += 1;
+          }
         }
       });
 
-      // 3. Dispatch automated email via EmailJS in the background
+      // 3. Dispatch automated email in the background (strictly once)
       sendAssessmentResultsEmail({
         candidate: candidate || { name: 'Anonymous Candidate', email: 'unknown' },
         questions,
@@ -195,28 +210,31 @@ export default function App() {
         timeTakenSeconds: elapsed,
         totalScore,
         totalQuestions: questions.length,
-        mcqStats: { correct: mcqCorrect, incorrect: mcqIncorrect, total: mcqTotal },
-        topicStats
+        mcqStats: { correct: mcqCorrect, incorrect: mcqIncorrect, unanswered: mcqUnanswered, total: mcqTotal },
+        topicStats,
+        isAutoSubmit
       }).catch((emailErr) => {
-        // Log to console for debugging as required, never block candidate UI
         console.error('Background email dispatch encountered error:', emailErr);
       });
 
       setIsFinished(true);
     } catch (err) {
       console.error('Grading error:', err);
+      hasSubmittedRef.current = false; // Allow retry if grading encountered an unexpected error
       showToast('Encountered an issue grading some answers. Please retry.', 'error');
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [candidate, questions, userAnswers, startTime, totalDurationSeconds, showToast]);
 
-  const handleTimeUp = () => {
+  const handleTimeUp = useCallback(() => {
+    if (hasSubmittedRef.current) return;
     showToast('Time has expired! Submitting your assessment...', 'warning');
-    handleSubmit();
-  };
+    handleSubmit(true);
+  }, [handleSubmit, showToast]);
 
   const handleRetake = () => {
+    hasSubmittedRef.current = false;
     // Re-shuffle MCQ options
     const freshQuestions = QUESTIONS.map((q) => {
       if (q.type === 'mcq' && Array.isArray(q.options)) {
@@ -273,7 +291,7 @@ export default function App() {
                 onAnswerChange={handleAnswerChange}
                 onNext={handleNext}
                 onPrev={handlePrev}
-                onSubmit={handleSubmit}
+                onSubmit={() => handleSubmit(false)}
                 onSkip={() => setShowSkipModal(true)}
                 isFirst={currentIndex === 0}
                 isLast={currentIndex === questions.length - 1}
