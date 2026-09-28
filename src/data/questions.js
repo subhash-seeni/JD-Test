@@ -1,163 +1,155 @@
 /**
- * Question Bank (30 questions)
- * Difficulty curve: easy -> moderate -> coding challenges -> consolidating at end.
+ * Question Bank – Set 2 (30 questions – replacement for retake)
+ * Same structure, topics, and difficulty distribution as Set 1.
  * Topics: HTML, CSS, JavaScript, PHP.
- * Covers PHP: foreach loops, date functions, array/string functions, function declaration & invocation.
+ * 21 MCQs + 9 Code questions.
  */
 
 export const QUESTIONS = [
-  // Q1 - HTML (Easy MCQ) - Refreshed
+  // Q1 – HTML (Easy MCQ)
   {
     id: 1,
     topic: 'HTML',
     type: 'mcq',
     difficulty: 'easy',
-    question: 'Which HTML tag is used to create a drop-down list of selectable options in a web form?',
-    options: ['<select>', '<dropdown>', '<input type="dropdown">', '<optionlist>'],
-    correctAnswer: '<select>'
+    question: 'Which HTML element is used to display text as a heading of the highest importance (largest by default)?',
+    options: ['<h1>', '<h6>', '<header>', '<heading>'],
+    correctAnswer: '<h1>'
   },
 
-  // Q2 - CSS (Easy MCQ) - Refreshed
+  // Q2 – CSS (Easy MCQ)
   {
     id: 2,
     topic: 'CSS',
     type: 'mcq',
     difficulty: 'easy',
-    question: 'Which CSS property controls the boldness or thickness of text?',
-    options: ['font-weight', 'font-bold', 'text-thickness', 'font-style'],
-    correctAnswer: 'font-weight'
+    question: 'Which CSS property is used to make text appear in italic style?',
+    options: ['font-style', 'font-weight', 'text-decoration', 'text-style'],
+    correctAnswer: 'font-style'
   },
 
-  // Q3 - JS (Easy MCQ) - Refreshed
+  // Q3 – JS (Easy MCQ)
   {
     id: 3,
     topic: 'JS',
     type: 'mcq',
     difficulty: 'easy',
-    question: 'Which JavaScript keyword declares a block-scoped variable that can be reassigned later?',
-    options: ['let', 'var', 'const', 'def'],
-    correctAnswer: 'let'
+    question: 'Which built-in JavaScript function displays an alert dialog box with a message?',
+    options: ['alert()', 'prompt()', 'confirm()', 'console.log()'],
+    correctAnswer: 'alert()'
   },
 
-  // Q4 - PHP (Easy MCQ)
+  // Q4 – PHP (Easy MCQ)
   {
     id: 4,
     topic: 'PHP',
     type: 'mcq',
     difficulty: 'easy',
-    question: 'How do you start a standard PHP script block?',
-    options: ['<?php', '<php>', '<script php>', '<%php'],
-    correctAnswer: '<?php'
+    question: 'In PHP, which symbol must prefix every variable name?',
+    options: ['$', '@', '#', '%'],
+    correctAnswer: '$'
   },
 
-  // Q5 - HTML (Easy MCQ)
+  // Q5 – HTML (Easy MCQ)
   {
     id: 5,
     topic: 'HTML',
     type: 'mcq',
     difficulty: 'easy',
-    question: 'Which attribute is used to provide alternative text for an image element?',
-    options: ['alt', 'title', 'src', 'description'],
-    correctAnswer: 'alt'
+    question: 'Which HTML element is used to define an unordered (bulleted) list?',
+    options: ['<ul>', '<ol>', '<li>', '<list>'],
+    correctAnswer: '<ul>'
   },
 
-  // Q6 - CSS (Easy MCQ)
+  // Q6 – CSS (Easy MCQ)
   {
     id: 6,
     topic: 'CSS',
     type: 'mcq',
     difficulty: 'easy',
-    question: 'Which CSS property is used to control the spacing between the border and the inner content of an element?',
-    options: ['padding', 'margin', 'spacing', 'border-spacing'],
-    correctAnswer: 'padding'
+    question: 'Which CSS property controls the size of text on a webpage?',
+    options: ['font-size', 'text-size', 'font-height', 'letter-size'],
+    correctAnswer: 'font-size'
   },
 
-  // Q7 - JS (Medium Code) - Refreshed (findMax)
+  // Q7 – JS (Medium Code)
   {
     id: 7,
     topic: 'JS',
     type: 'code',
     difficulty: 'medium',
-    question: 'Write a JavaScript function findMax(numbers) that takes an array of numbers and returns the largest number in the array.',
-    placeholder: `function findMax(numbers) {\n  // your code here\n}`,
-    functionName: 'findMax',
+    question: 'Write a JavaScript function reverseString(str) that takes a string and returns it reversed. For example, reverseString("hello") should return "olleh".',
+    placeholder: `function reverseString(str) {\n  // your code here\n}`,
+    functionName: 'reverseString',
     hints: [
-      'Accept an array of numbers as argument',
-      'Iterate through the array or use Math.max(...numbers)',
-      'Return the largest numeric value'
+      'Accept a string as an argument',
+      'Split the string into characters, reverse the array, and join back',
+      'Or use a loop to build the reversed string',
+      'Return the reversed string'
     ],
     testCases: [
-      { input: [[3, 7, 2, 9, 4]], expected: 9, label: 'findMax([3, 7, 2, 9, 4])' },
-      { input: [[-10, -3, -50]], expected: -3, label: 'findMax([-10, -3, -50])' },
-      { input: [[42]], expected: 42, label: 'findMax([42])' },
-      { input: [[0, 0, 0]], expected: 0, label: 'findMax([0, 0, 0])' },
-      { input: [[-5, 10, 2]], expected: 10, label: 'findMax([-5, 10, 2])' },
-      { input: [[100, 250, 80]], expected: 250, label: 'findMax([100, 250, 80])' }
+      { input: ['hello'], expected: 'olleh', label: 'reverseString("hello")' },
+      { input: ['JavaScript'], expected: 'tpircSavaJ', label: 'reverseString("JavaScript")' },
+      { input: [''], expected: '', label: 'reverseString("")' },
+      { input: ['a'], expected: 'a', label: 'reverseString("a")' },
+      { input: ['abcde'], expected: 'edcba', label: 'reverseString("abcde")' },
+      { input: ['12345'], expected: '54321', label: 'reverseString("12345")' }
     ]
   },
 
-  // Q8 - PHP (Medium MCQ)
+  // Q8 – PHP (Medium MCQ)
   {
     id: 8,
     topic: 'PHP',
     type: 'mcq',
     difficulty: 'medium',
-    question: 'In PHP, which statement includes and evaluates a file, but throws a fatal error and stops script execution if the file is missing?',
-    options: ['require', 'include', 'import', 'load_file'],
-    correctAnswer: 'require'
+    question: 'In PHP, which built-in function returns the number of elements in an array?',
+    options: ['count()', 'array_length()', 'strlen()', 'array_size()'],
+    correctAnswer: 'count()'
   },
 
-  // Q9 - JS (Hard MCQ)
+  // Q9 – JS (Hard MCQ)
   {
     id: 9,
     topic: 'JS',
     type: 'mcq',
     difficulty: 'hard',
-    question: 'What will [1, 2, 3].map(x => x * 2) return?',
-    options: ['[2, 4, 6]', '[1, 2, 3]', '6', 'undefined'],
-    correctAnswer: '[2, 4, 6]'
+    question: 'What does console.log(0.1 + 0.2 === 0.3) output in JavaScript?',
+    options: ['false', 'true', 'NaN', 'undefined'],
+    correctAnswer: 'false'
   },
 
-  // Q10 - PHP (Foreach Loop - Medium Code) - NEW
+  // Q10 – PHP (Medium Code – array_reverse)
   {
     id: 10,
     topic: 'PHP',
     type: 'code',
     difficulty: 'medium',
-    question: "Write a PHP function calculateCartTotal($items) that accepts an array of cart items, where each item is an associative array with 'price' and 'quantity' keys. Use a foreach loop to calculate and return the total cost of all items in the cart.",
-    placeholder: `function calculateCartTotal($items) {\n  // your code here\n}`,
+    question: "Write a PHP function reverseArray($arr) that accepts an array and returns it in reversed order using PHP's built-in array_reverse() function.",
+    placeholder: `function reverseArray($arr) {\n  // your code here\n}`,
     hints: [
-      'Define function calculateCartTotal($items)',
-      'Use a foreach loop: foreach ($items as $item)',
-      'Multiply price by quantity for each item and add to a running total',
-      'Return the accumulated total sum'
+      'Declare function reverseArray($arr)',
+      'Call array_reverse($arr) on the input',
+      'Return the reversed array'
     ],
     gradingPatterns: [
       {
         id: 'function_declaration',
-        label: 'Declares function calculateCartTotal($items)',
-        regex: /function\s+calculateCartTotal\s*\(/i,
-        weight: 0.20
-      },
-      {
-        id: 'foreach_loop',
-        label: 'Uses foreach loop to iterate through items array',
-        regex: /\bforeach\s*\(\s*\$[a-zA-Z0-9_]+\s+as\s+/i,
-        weight: 0.30
-      },
-      {
-        id: 'calc_multiplication',
-        label: 'Multiplies item price by quantity and accumulates',
-        check: (code) => {
-          return /\*/.test(code) && /(price|quantity|qty|\[['"]?\w+['"]?\]|\$[a-zA-Z0-9_]+)/i.test(code);
-        },
+        label: 'Declares function reverseArray($arr)',
+        regex: /function\s+reverseArray\s*\(/i,
         weight: 0.25
       },
       {
-        id: 'return_total',
-        label: 'Contains return statement for calculated total',
-        regex: /\breturn\s+\$[a-zA-Z0-9_]+/i,
-        weight: 0.15
+        id: 'uses_array_reverse',
+        label: 'Calls built-in array_reverse()',
+        regex: /\barray_reverse\s*\(/i,
+        weight: 0.40
+      },
+      {
+        id: 'return_statement',
+        label: 'Returns the reversed array',
+        regex: /\breturn\b/i,
+        weight: 0.20
       },
       {
         id: 'balanced_braces',
@@ -171,110 +163,107 @@ export const QUESTIONS = [
           }
           return depth === 0 && code.includes('{') && code.includes('}');
         },
-        weight: 0.10
+        weight: 0.15
       }
     ]
   },
 
-  // Q11 - PHP (Foreach Loop - Easy MCQ) - NEW
+  // Q11 – PHP (Easy MCQ)
   {
     id: 11,
     topic: 'PHP',
     type: 'mcq',
     difficulty: 'easy',
-    question: 'In PHP, which of the following is the correct syntax for a foreach loop to iterate through an associative array while accessing both the key and the value?',
-    options: [
-      'foreach ($array as $key => $value) { ... }',
-      'foreach ($array as $value => $key) { ... }',
-      'foreach ($key => $value in $array) { ... }',
-      'for ($array as $key : $value) { ... }'
-    ],
-    correctAnswer: 'foreach ($array as $key => $value) { ... }'
+    question: 'In PHP, which function returns the number of characters in a string?',
+    options: ['strlen()', 'length()', 'str_length()', 'count()'],
+    correctAnswer: 'strlen()'
   },
 
-  // Q12 - JS (Hard Code) - Refreshed (countVowels)
+  // Q12 – JS (Hard Code – isPalindrome)
   {
     id: 12,
     topic: 'JS',
     type: 'code',
     difficulty: 'hard',
-    question: 'Write a JavaScript function countVowels(str) that counts and returns the total number of vowels (a, e, i, o, u, case-insensitive) in a given string.',
-    placeholder: `function countVowels(str) {\n  // your code here\n}`,
-    functionName: 'countVowels',
+    question: 'Write a JavaScript function isPalindrome(str) that returns true if the given string reads the same forwards and backwards (case-insensitive), and false otherwise. For example, isPalindrome("Madam") should return true.',
+    placeholder: `function isPalindrome(str) {\n  // your code here\n}`,
+    functionName: 'isPalindrome',
     hints: [
-      'Count all occurrences of vowels: a, e, i, o, u',
-      'Must be case-insensitive (e.g., handles "A", "E")',
-      'Return 0 for empty strings or strings without vowels'
+      'Convert the string to lowercase for case-insensitive comparison',
+      'Reverse the string and compare it to the original lowercased string',
+      'Return true if they match, false otherwise',
+      'Empty string is considered a palindrome'
     ],
     testCases: [
-      { input: ['hello'], expected: 2, label: 'countVowels("hello")' },
-      { input: ['JavaScript'], expected: 3, label: 'countVowels("JavaScript")' },
-      { input: ['xyz'], expected: 0, label: 'countVowels("xyz")' },
-      { input: ['AEIOU'], expected: 5, label: 'countVowels("AEIOU")' },
-      { input: [''], expected: 0, label: 'countVowels("")' },
-      { input: ['Web Developer'], expected: 4, label: 'countVowels("Web Developer")' }
+      { input: ['racecar'], expected: true, label: 'isPalindrome("racecar")' },
+      { input: ['hello'], expected: false, label: 'isPalindrome("hello")' },
+      { input: ['A'], expected: true, label: 'isPalindrome("A")' },
+      { input: ['Madam'], expected: true, label: 'isPalindrome("Madam")' },
+      { input: [''], expected: true, label: 'isPalindrome("")' },
+      { input: ['JavaScript'], expected: false, label: 'isPalindrome("JavaScript")' }
     ]
   },
 
-  // Q13 - JS (Hard MCQ) - Refreshed (typeof null)
+  // Q13 – JS (Hard MCQ)
   {
     id: 13,
     topic: 'JS',
     type: 'mcq',
     difficulty: 'hard',
-    question: 'In JavaScript, what does the expression typeof null evaluate to?',
-    options: ['"object"', '"null"', '"undefined"', '"number"'],
-    correctAnswer: '"object"'
+    question: 'What is the key difference between == and === in JavaScript?',
+    options: [
+      '=== checks both value and type (strict); == checks value only after type coercion',
+      '== checks both value and type; === only checks the value',
+      'They are completely identical in all cases',
+      '=== is used for objects only; == is used for primitives'
+    ],
+    correctAnswer: '=== checks both value and type (strict); == checks value only after type coercion'
   },
 
-  // Q14 - CSS (Hard MCQ)
+  // Q14 – CSS (Hard MCQ)
   {
     id: 14,
     topic: 'CSS',
     type: 'mcq',
     difficulty: 'hard',
-    question: 'Which CSS layout model is specifically designed for building a two-dimensional layout (handling rows AND columns simultaneously)?',
-    options: ['CSS Grid', 'Flexbox', 'Float', 'Position: absolute'],
-    correctAnswer: 'CSS Grid'
+    question: 'Which CSS property controls the stacking order of overlapping positioned elements on a webpage?',
+    options: ['z-index', 'stack-order', 'layer-order', 'depth'],
+    correctAnswer: 'z-index'
   },
 
-  // Q15 - PHP (Date Function - Medium Code) - NEW
+  // Q15 – PHP (Medium Code – string concat / interpolation)
   {
     id: 15,
     topic: 'PHP',
     type: 'code',
     difficulty: 'medium',
-    question: "Write a PHP function formatCustomDateTime($timestamp) that takes a UNIX timestamp integer and uses PHP's built-in date() function to return a formatted date and time string in the format 'Y-m-d H:i:s' (e.g. '2026-03-30 14:30:00').",
-    placeholder: `function formatCustomDateTime($timestamp) {\n  // your code here\n}`,
+    question: "Write a PHP function generateGreeting($name, $timeOfDay) that accepts a person's name and a time-of-day string, and returns a greeting such as \"Good morning, Alice!\". Use PHP string concatenation (.) or string interpolation to build the output.",
+    placeholder: `function generateGreeting($name, $timeOfDay) {\n  // your code here\n}`,
     hints: [
-      'Call PHP built-in date($format, $timestamp)',
-      "Use format string 'Y-m-d H:i:s' (24-hour format with leading zeros)",
-      'Return the formatted date string'
+      'Declare function generateGreeting($name, $timeOfDay)',
+      'Build the greeting string using . concatenation or double-quoted interpolation',
+      'Return the final greeting string'
     ],
     gradingPatterns: [
       {
         id: 'function_declaration',
-        label: 'Declares function formatCustomDateTime($timestamp)',
-        regex: /function\s+formatCustomDateTime\s*\(/i,
-        weight: 0.20
-      },
-      {
-        id: 'uses_date_func',
-        label: 'Calls built-in date() function',
-        regex: /\bdate\s*\(/i,
+        label: 'Declares function generateGreeting with two parameters',
+        regex: /function\s+generateGreeting\s*\(\s*\$[a-zA-Z0-9_]+\s*,\s*\$[a-zA-Z0-9_]+\s*\)/i,
         weight: 0.25
       },
       {
-        id: 'format_string',
-        label: "Uses exact format 'Y-m-d H:i:s'",
-        regex: /['"]Y-m-d\s+H:i:s['"]/,
-        weight: 0.30
+        id: 'string_building',
+        label: 'Builds greeting string using concatenation or interpolation',
+        check: (code) => {
+          return /\.\s*\$[a-zA-Z0-9_]+/.test(code) || /"\$[a-zA-Z0-9_]+/.test(code) || /'[^']*'\s*\.\s*/.test(code);
+        },
+        weight: 0.35
       },
       {
         id: 'return_statement',
-        label: 'Returns formatted date with timestamp parameter',
-        regex: /\breturn\s+(date\s*\(|\$[a-zA-Z0-9_]+)/i,
-        weight: 0.15
+        label: 'Returns the greeting string',
+        regex: /\breturn\b/i,
+        weight: 0.25
       },
       {
         id: 'balanced_braces',
@@ -288,44 +277,39 @@ export const QUESTIONS = [
           }
           return depth === 0 && code.includes('{') && code.includes('}');
         },
-        weight: 0.10
+        weight: 0.15
       }
     ]
   },
 
-  // Q16 - PHP (Date Function - Easy MCQ) - NEW
+  // Q16 – PHP (Easy MCQ)
   {
     id: 16,
     topic: 'PHP',
     type: 'mcq',
     difficulty: 'easy',
-    question: "In PHP, which date() format string outputs the date and time in 24-hour format with leading zeros like '2026-05-15 09:30:00'?",
-    options: [
-      "date('Y-m-d H:i:s')",
-      "date('yyyy-mm-dd hh:mm:ss')",
-      "date('Y-M-D h:i:s')",
-      "date('d-m-Y H:i:s')"
-    ],
-    correctAnswer: "date('Y-m-d H:i:s')"
+    question: 'In PHP, which operator is used to concatenate (join) two strings together?',
+    options: ['.', '+', '&', '||'],
+    correctAnswer: '.'
   },
 
-  // Q17 - CSS (Medium Code)
+  // Q17 – CSS (Medium Code – centering with Flexbox)
   {
     id: 17,
     topic: 'CSS',
     type: 'code',
     difficulty: 'medium',
-    question: 'Write a CSS rule that makes all direct children of an element with class .container display in a row with equal spacing between them using Flexbox.',
-    placeholder: `.container {\n  /* your code here */\n}`,
+    question: 'Write a CSS rule for a .wrapper element that uses Flexbox to center its child content both horizontally and vertically.',
+    placeholder: `.wrapper {\n  /* your code here */\n}`,
     hints: [
-      'Target selector: .container',
+      'Target selector: .wrapper',
       'Set display to flex',
-      'Set justify-content to space-between',
-      'flex-direction is row by default'
+      'Set justify-content to center (horizontal)',
+      'Set align-items to center (vertical)'
     ],
     expectedStyles: {
-      targetSelector: '.container',
-      htmlSnippet: '<div class="container"><div class="item">Item 1</div><div class="item">Item 2</div><div class="item">Item 3</div></div>',
+      targetSelector: '.wrapper',
+      htmlSnippet: '<div class="wrapper" style="width:200px;height:200px;"><div class="child">Center me</div></div>',
       properties: [
         {
           name: 'display',
@@ -335,126 +319,114 @@ export const QUESTIONS = [
         },
         {
           name: 'justify-content',
-          expected: ['space-between'],
+          expected: ['center'],
           partialMatches: ['space-around', 'space-evenly'],
-          partialWeightRatio: 0.7,
-          weight: 0.4,
-          label: 'justify-content: space-between'
+          partialWeightRatio: 0.5,
+          weight: 0.3,
+          label: 'justify-content: center'
         },
         {
-          name: 'flex-direction',
-          expected: ['row', ''],
-          weight: 0.2,
-          label: 'flex-direction: row (or default)'
+          name: 'align-items',
+          expected: ['center'],
+          partialMatches: ['stretch'],
+          partialWeightRatio: 0.3,
+          weight: 0.3,
+          label: 'align-items: center'
         }
       ]
     }
   },
 
-  // Q18 - PHP (Function Declaration & Invocation - Medium Code) - NEW
+  // Q18 – PHP (Medium Code – str_word_count + function call)
   {
     id: 18,
     topic: 'PHP',
     type: 'code',
     difficulty: 'medium',
-    question: "Write PHP code that:\n1. Declares a function named calculateDiscount($originalPrice, $discountPercent) that calculates and returns the price after applying the discount.\n2. Calls the function with $originalPrice = 100 and $discountPercent = 20, storing the returned result in a variable named $finalPrice.",
-    placeholder: `// 1. Declare the calculateDiscount function\nfunction calculateDiscount($originalPrice, $discountPercent) {\n  // your code here\n}\n\n// 2. Call the function and assign to $finalPrice\n$finalPrice = calculateDiscount(100, 20);`,
+    question: "Write PHP code that:\n1. Declares a function countWords($sentence) that uses PHP's str_word_count() to count and return the number of words in the given string.\n2. Calls the function with the string \"Hello World from PHP\" and stores the result in a variable named $wordCount.",
+    placeholder: `// 1. Declare the countWords function\nfunction countWords($sentence) {\n  // your code here\n}\n\n// 2. Call the function and assign to $wordCount\n$wordCount = countWords("Hello World from PHP");`,
     hints: [
-      'Declare function calculateDiscount($originalPrice, $discountPercent)',
-      'Calculate: $originalPrice - ($originalPrice * ($discountPercent / 100))',
-      'Return the final discounted value',
-      'Call calculateDiscount(100, 20) and assign to $finalPrice'
+      'Declare function countWords($sentence)',
+      'Use str_word_count($sentence) inside the function',
+      'Return the count',
+      'Call countWords("Hello World from PHP") and assign to $wordCount'
     ],
     gradingPatterns: [
       {
         id: 'function_declaration',
-        label: 'Declares function calculateDiscount($originalPrice, $discountPercent)',
-        regex: /function\s+calculateDiscount\s*\(\s*\$[a-zA-Z0-9_]+\s*,\s*\$[a-zA-Z0-9_]+\s*\)/i,
-        weight: 0.25
+        label: 'Declares function countWords($sentence)',
+        regex: /function\s+countWords\s*\(/i,
+        weight: 0.20
       },
       {
-        id: 'discount_calculation',
-        label: 'Calculates discounted price math formula',
-        check: (code) => {
-          return /(-|\*|\/)/.test(code) && /(price|discount|100|\$[a-zA-Z0-9_]+)/i.test(code);
-        },
-        weight: 0.25
+        id: 'uses_str_word_count',
+        label: 'Uses built-in str_word_count() function',
+        regex: /\bstr_word_count\s*\(/i,
+        weight: 0.30
       },
       {
         id: 'return_statement',
-        label: 'Returns the discounted price',
+        label: 'Returns the word count',
         regex: /\breturn\b/i,
         weight: 0.15
       },
       {
         id: 'function_invocation',
-        label: 'Calls calculateDiscount with arguments',
-        regex: /\bcalculateDiscount\s*\(\s*(100|\$[a-zA-Z0-9_]+)\s*,\s*(20|\$[a-zA-Z0-9_]+)\s*\)/i,
-        weight: 0.25
+        label: 'Calls countWords with a string argument',
+        regex: /\bcountWords\s*\([^)]+\)/i,
+        weight: 0.20
       },
       {
         id: 'variable_assignment',
-        label: 'Assigns result to $finalPrice',
-        regex: /\$finalPrice\s*=\s*calculateDiscount/i,
-        weight: 0.10
+        label: 'Assigns result to $wordCount',
+        regex: /\$wordCount\s*=\s*countWords/i,
+        weight: 0.15
       }
     ]
   },
 
-  // Q19 - PHP (Function Declaration with Default Arg - Medium MCQ) - NEW
+  // Q19 – PHP (Medium MCQ)
   {
     id: 19,
     topic: 'PHP',
     type: 'mcq',
     difficulty: 'medium',
-    question: 'In PHP, how do you declare a function with an optional parameter having a default value of 0.08 for $taxRate, and call it without passing that second argument?',
-    options: [
-      'function addTax($amount, $taxRate = 0.08) { ... } called with addTax(50);',
-      'def addTax($amount, $taxRate: 0.08) { ... } called with addTax(50);',
-      'function addTax($amount, $taxRate == 0.08) { ... } called with call addTax(50);',
-      'addTax = function($amount, default $taxRate = 0.08) { ... } called with addTax.exec(50);'
-    ],
-    correctAnswer: 'function addTax($amount, $taxRate = 0.08) { ... } called with addTax(50);'
+    question: 'In PHP, which superglobal array is used to collect form data submitted via the HTTP POST method?',
+    options: ['$_POST', '$_GET', '$_REQUEST', '$_FORM'],
+    correctAnswer: '$_POST'
   },
 
-  // Q20 - PHP (Array Functions - Medium Code) - NEW
+  // Q20 – PHP (Medium Code – ucwords)
   {
     id: 20,
     topic: 'PHP',
     type: 'code',
     difficulty: 'medium',
-    question: "Write a PHP function filterEvenNumbers($numbers) that takes an array of integers and uses PHP's array_filter() function to return an array containing only the even numbers, re-indexed using array_values().",
-    placeholder: `function filterEvenNumbers($numbers) {\n  // your code here\n}`,
+    question: "Write a PHP function capitalizeWords($str) that takes a string and returns it with the first letter of every word capitalized, using PHP's built-in ucwords() function.",
+    placeholder: `function capitalizeWords($str) {\n  // your code here\n}`,
     hints: [
-      'Declare function filterEvenNumbers($numbers)',
-      'Use array_filter($numbers, callback) to filter even numbers ($n % 2 === 0)',
-      'Use array_values() to reset array keys',
-      'Return the filtered array'
+      'Declare function capitalizeWords($str)',
+      'Call ucwords($str) on the input',
+      'Return the result'
     ],
     gradingPatterns: [
       {
         id: 'function_declaration',
-        label: 'Declares function filterEvenNumbers($numbers)',
-        regex: /function\s+filterEvenNumbers\s*\(/i,
-        weight: 0.20
-      },
-      {
-        id: 'uses_array_filter',
-        label: 'Uses built-in array_filter() function',
-        regex: /\barray_filter\s*\(/i,
-        weight: 0.30
-      },
-      {
-        id: 'even_modulo_check',
-        label: 'Checks for even numbers with modulo operator (% 2 == 0)',
-        regex: /%\s*2\s*===?\s*0/i,
+        label: 'Declares function capitalizeWords($str)',
+        regex: /function\s+capitalizeWords\s*\(/i,
         weight: 0.25
       },
       {
-        id: 'uses_array_values_or_return',
-        label: 'Re-indexes using array_values() and returns array',
-        regex: /(\barray_values\s*\(|\breturn\b)/i,
-        weight: 0.15
+        id: 'uses_ucwords',
+        label: 'Uses built-in ucwords() function',
+        regex: /\bucwords\s*\(/i,
+        weight: 0.45
+      },
+      {
+        id: 'return_statement',
+        label: 'Returns the capitalized string',
+        regex: /\breturn\b/i,
+        weight: 0.20
       },
       {
         id: 'balanced_braces',
@@ -473,118 +445,37 @@ export const QUESTIONS = [
     ]
   },
 
-  // Q21 - PHP (String Functions - Medium Code) - NEW
+  // Q21 – PHP (Medium Code – in_array + conditional)
   {
     id: 21,
     topic: 'PHP',
     type: 'code',
     difficulty: 'medium',
-    question: "Write a PHP function formatUserProfileSlug($rawUsername) that takes a username string, trims leading and trailing whitespace using trim(), converts all characters to lowercase using strtolower(), and replaces internal spaces with hyphens ('-') using str_replace(), returning the cleaned slug.",
-    placeholder: `function formatUserProfileSlug($rawUsername) {\n  // your code here\n}`,
+    question: "Write a PHP function checkIfExists($haystack, $needle) that takes an array ($haystack) and a value ($needle), and returns true if the value is found in the array using PHP's in_array() function, or false otherwise.",
+    placeholder: `function checkIfExists($haystack, $needle) {\n  // your code here\n}`,
     hints: [
-      'trim($rawUsername) strips whitespace from boundaries',
-      'strtolower(...) converts all characters to lowercase',
-      "str_replace(' ', '-', ...) replaces spaces with hyphens",
-      'Return the cleaned slug string'
+      'Declare function checkIfExists($haystack, $needle)',
+      'Use in_array($needle, $haystack) to check for the value',
+      'Return the boolean result (true or false)'
     ],
     gradingPatterns: [
       {
         id: 'function_declaration',
-        label: 'Declares function formatUserProfileSlug',
-        regex: /function\s+formatUserProfileSlug\s*\(/i,
-        weight: 0.20
-      },
-      {
-        id: 'uses_trim',
-        label: 'Uses trim() to strip boundary whitespace',
-        regex: /\btrim\s*\(/i,
-        weight: 0.20
-      },
-      {
-        id: 'uses_strtolower',
-        label: 'Uses strtolower() to convert to lowercase',
-        regex: /\b(mb_)?strtolower\s*\(/i,
-        weight: 0.20
-      },
-      {
-        id: 'uses_str_replace',
-        label: "Uses str_replace() to replace spaces with hyphens ('-')",
-        regex: /\bstr_replace\s*\(/i,
+        label: 'Declares function checkIfExists($haystack, $needle)',
+        regex: /function\s+checkIfExists\s*\(\s*\$[a-zA-Z0-9_]+\s*,\s*\$[a-zA-Z0-9_]+\s*\)/i,
         weight: 0.25
+      },
+      {
+        id: 'uses_in_array',
+        label: 'Uses in_array() to search the array',
+        regex: /\bin_array\s*\(/i,
+        weight: 0.45
       },
       {
         id: 'return_statement',
-        label: 'Returns the formatted slug string',
+        label: 'Returns a boolean result',
         regex: /\breturn\b/i,
-        weight: 0.15
-      }
-    ]
-  },
-
-  // Q22 - PHP (Array/String Functions - Medium MCQ) - NEW
-  {
-    id: 22,
-    topic: 'PHP',
-    type: 'mcq',
-    difficulty: 'medium',
-    question: "Which PHP function is used to join elements of an array into a single string with a specified separator (e.g. converting ['PHP', 'MySQL', 'JavaScript'] into 'PHP, MySQL, JavaScript')?",
-    options: ['implode()', 'explode()', 'array_join()', 'str_split()'],
-    correctAnswer: 'implode()'
-  },
-
-  // Q23 - PHP (Array/String Functions - Easy MCQ) - NEW
-  {
-    id: 23,
-    topic: 'PHP',
-    type: 'mcq',
-    difficulty: 'easy',
-    question: "In PHP, which function splits a string into an array by a specified delimiter (e.g. breaking 'apple,banana,orange' at each comma)?",
-    options: ['explode()', 'implode()', 'str_split()', 'array_slice()'],
-    correctAnswer: 'explode()'
-  },
-
-  // Q24 - PHP (Environment Variables - Medium MCQ) - Refreshed
-  {
-    id: 24,
-    topic: 'PHP',
-    type: 'mcq',
-    difficulty: 'medium',
-    question: 'Which PHP superglobal array contains server information, request headers, client IP, and script execution paths?',
-    options: ['$_SERVER', '$_ENV', '$_GLOBAL', '$_REQUEST'],
-    correctAnswer: '$_SERVER'
-  },
-
-  // Q25 - PHP (General PHP - Hard Code) - Preserved
-  {
-    id: 25,
-    topic: 'PHP',
-    type: 'code',
-    difficulty: 'hard',
-    question: 'Write a PHP function sumArray($arr) that returns the sum of all elements in an array.',
-    placeholder: `function sumArray($arr) {\n  // your code here\n}`,
-    hints: [
-      'Declare function sumArray($arr)',
-      'Use array_sum($arr) or iterate using a foreach loop',
-      'Return the calculated total'
-    ],
-    gradingPatterns: [
-      {
-        id: 'function_declaration',
-        label: 'Declares function sumArray',
-        regex: /function\s+sumArray\s*\(/i,
-        weight: 0.25
-      },
-      {
-        id: 'return_statement',
-        label: 'Contains a return statement',
-        regex: /\breturn\b/i,
-        weight: 0.25
-      },
-      {
-        id: 'sum_logic',
-        label: 'Uses array_sum or loop (foreach / for / while)',
-        regex: /(\barray_sum\s*\(|\bforeach\s*\(|\bfor\s*\(|\bwhile\s*\()/i,
-        weight: 0.35
+        weight: 0.20
       },
       {
         id: 'balanced_braces',
@@ -598,63 +489,143 @@ export const QUESTIONS = [
           }
           return depth === 0 && code.includes('{') && code.includes('}');
         },
-        weight: 0.15
+        weight: 0.10
       }
     ]
   },
 
-  // Q26 - HTML (Medium MCQ)
+  // Q22 – PHP (Medium MCQ)
+  {
+    id: 22,
+    topic: 'PHP',
+    type: 'mcq',
+    difficulty: 'medium',
+    question: 'Which PHP function removes duplicate values from an array and returns the result?',
+    options: ['array_unique()', 'array_distinct()', 'array_filter()', 'array_diff()'],
+    correctAnswer: 'array_unique()'
+  },
+
+  // Q23 – PHP (Easy MCQ)
+  {
+    id: 23,
+    topic: 'PHP',
+    type: 'mcq',
+    difficulty: 'easy',
+    question: 'In PHP, which function converts a string to all uppercase letters?',
+    options: ['strtoupper()', 'uppercase()', 'str_upper()', 'toUpperCase()'],
+    correctAnswer: 'strtoupper()'
+  },
+
+  // Q24 – PHP (Medium MCQ)
+  {
+    id: 24,
+    topic: 'PHP',
+    type: 'mcq',
+    difficulty: 'medium',
+    question: 'In PHP, what is the correct way to check if a specific key exists in an associative array?',
+    options: [
+      'array_key_exists($key, $array)',
+      'in_array($key, $array)',
+      'isset($array->$key)',
+      'key_exists($key, $array)'
+    ],
+    correctAnswer: 'array_key_exists($key, $array)'
+  },
+
+  // Q25 – PHP (Hard Code – array_unique + re-index)
+  {
+    id: 25,
+    topic: 'PHP',
+    type: 'code',
+    difficulty: 'hard',
+    question: 'Write a PHP function removeDuplicates($arr) that takes an array of values, removes duplicate entries using array_unique(), re-indexes the result using array_values(), and returns the cleaned array.',
+    placeholder: `function removeDuplicates($arr) {\n  // your code here\n}`,
+    hints: [
+      'Declare function removeDuplicates($arr)',
+      'Use array_unique($arr) to eliminate duplicates',
+      'Use array_values() to re-index the resulting array',
+      'Return the final array'
+    ],
+    gradingPatterns: [
+      {
+        id: 'function_declaration',
+        label: 'Declares function removeDuplicates($arr)',
+        regex: /function\s+removeDuplicates\s*\(/i,
+        weight: 0.20
+      },
+      {
+        id: 'uses_array_unique',
+        label: 'Uses array_unique() to remove duplicates',
+        regex: /\barray_unique\s*\(/i,
+        weight: 0.35
+      },
+      {
+        id: 'uses_array_values',
+        label: 'Uses array_values() to re-index the array',
+        regex: /\barray_values\s*\(/i,
+        weight: 0.25
+      },
+      {
+        id: 'return_statement',
+        label: 'Returns the cleaned array',
+        regex: /\breturn\b/i,
+        weight: 0.20
+      }
+    ]
+  },
+
+  // Q26 – HTML (Medium MCQ)
   {
     id: 26,
     topic: 'HTML',
     type: 'mcq',
     difficulty: 'medium',
-    question: 'Which input type is used to create a checkbox element in HTML?',
-    options: ['<input type="checkbox">', '<input type="check">', '<checkbox>', '<input type="tick">'],
-    correctAnswer: '<input type="checkbox">'
+    question: 'Which HTML element defines a single row inside a table?',
+    options: ['<tr>', '<td>', '<th>', '<row>'],
+    correctAnswer: '<tr>'
   },
 
-  // Q27 - HTML (Medium MCQ)
+  // Q27 – HTML (Medium MCQ)
   {
     id: 27,
     topic: 'HTML',
     type: 'mcq',
     difficulty: 'medium',
-    question: 'Which HTML attribute is used to specify that a link should open in a new browser tab or window?',
-    options: ['target="_blank"', 'href="_new"', 'rel="external"', 'window="open"'],
-    correctAnswer: 'target="_blank"'
+    question: 'Which HTML attribute specifies the destination URL for an anchor (<a>) element?',
+    options: ['href', 'src', 'url', 'link'],
+    correctAnswer: 'href'
   },
 
-  // Q28 - JS (Medium MCQ)
+  // Q28 – JS (Medium MCQ)
   {
     id: 28,
     topic: 'JS',
     type: 'mcq',
     difficulty: 'medium',
-    question: 'Which method is used to append a new element to the end of an array in JavaScript?',
-    options: ['array.push()', 'array.pop()', 'array.shift()', 'array.add()'],
-    correctAnswer: 'array.push()'
+    question: 'Which JavaScript array method removes and returns the last element of an array?',
+    options: ['array.pop()', 'array.push()', 'array.shift()', 'array.splice()'],
+    correctAnswer: 'array.pop()'
   },
 
-  // Q29 - CSS (Medium MCQ)
+  // Q29 – CSS (Medium MCQ)
   {
     id: 29,
     topic: 'CSS',
     type: 'mcq',
     difficulty: 'medium',
-    question: "Which CSS box-sizing property value ensures that padding and border are included within the element's total width and height?",
-    options: ['border-box', 'content-box', 'padding-box', 'margin-box'],
-    correctAnswer: 'border-box'
+    question: 'Which CSS property adds space outside the border of an element, separating it from neighbouring elements?',
+    options: ['margin', 'padding', 'border-spacing', 'outline-offset'],
+    correctAnswer: 'margin'
   },
 
-  // Q30 - HTML (Medium MCQ)
+  // Q30 – HTML (Medium MCQ)
   {
     id: 30,
     topic: 'HTML',
     type: 'mcq',
     difficulty: 'medium',
-    question: 'Which HTML5 semantic tag is specifically designated to wrap the primary navigation links of a website?',
-    options: ['<nav>', '<div>', '<section>', '<header>'],
-    correctAnswer: '<nav>'
+    question: 'Which HTML element is used to embed an image into a webpage?',
+    options: ['<img>', '<image>', '<picture>', '<embed>'],
+    correctAnswer: '<img>'
   }
 ];
